@@ -11,6 +11,7 @@ ln -sf "$DOTFILES_DIR/config/hyprland/hyprland.conf" ~/.config/hypr/hyprland.con
 #Waybar
 mkdir -p ~/.config/waybar
 ln -sf "$DOTFILES_DIR/config/waybar/config.jsonc" ~/.config/waybar/config.jsonc
+ln -sf "$DOTFILES_DIR/config/waybar/style.css" ~/.config/waybar/style.css
 rm -rf ~/.config/waybar/scripts
 ln -sf "$DOTFILES_DIR/config/waybar/scripts" ~/.config/waybar/scripts
 

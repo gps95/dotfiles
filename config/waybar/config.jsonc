@@ -25,12 +25,12 @@
         "memory",
     //    "temperature",
     //    "backlight",
-    //    "keyboard-state",
 	"custom/temps",
     //    "sway/language",
     //    "battery",
     //    "battery#bat2",
         "clock",
+        "keyboard-state",
         "tray"
     //    "custom/power"
     ],
@@ -51,15 +51,15 @@
     //         "default": ""
     //     }
     // },
-    //"keyboard-state": {
-    //    "numlock": true,
-    //    "capslock": true,
-    //    "format": "{name} {icon}",
-    //    "format-icons": {
-    //        "locked": "",
-    //        "unlocked": ""
-    //    }
-    //},
+    "keyboard-state": {
+        //"numlock": true,
+        "capslock": true,
+        "format": "CAPS {icon}",
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
     //"sway/mode": {
     //    "format": "<span style=\"italic\">{}</span>"
     //},
