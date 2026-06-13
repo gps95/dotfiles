@@ -19,7 +19,9 @@ window#waybar {
   /*Background color*/
   background: #282c34;
   /*General Font color*/
-  color: #ffffff;
+  /*color: #ffffff;*//*white*/
+  /*color: #9cdef2;*//*blue*/
+  color: #fab387;/*Orange*/
   /*Borders*/
   /*border: 3px solid #61afef;
   border-left: 3px solid #56b6c2;
