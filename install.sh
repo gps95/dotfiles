@@ -16,6 +16,11 @@ ln -sf "$DOTFILES_DIR/config/waybar/style.css" ~/.config/waybar/style.css
 rm -rf ~/.config/waybar/scripts
 ln -sf "$DOTFILES_DIR/config/waybar/scripts" ~/.config/waybar/scripts
 
+#Wofi
+mkdir -p ~/.config/wofi
+ln -sf "$DOTFILES_DIR/config/wofi/config" ~/.config/wofi/config
+ln -sf "$DOTFILES_DIR/config/wofi/style.css" ~/.config/wofi/style.css
+
 echo "Symlinks done,reloading hyprland"
 
 hyprctl reload

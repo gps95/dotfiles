@@ -11,7 +11,7 @@ waybar * {
 *:hover {
   background-color: #4c566a;
   border: 2px solid #56b6c2;
-  color: #56b6c2;
+  color: #fab387;
   transition: all 0.2s ease-in-out;
 }
 
@@ -20,8 +20,8 @@ window#waybar {
   background: #282c34;
   /*General Font color*/
   /*color: #ffffff;*//*white*/
-  /*color: #9cdef2;*//*blue*/
-  color: #fab387;/*Orange*/
+  color: #9cdef2;/*blue*/
+  /*color: #fab387;*//*Orange*/
   /*Borders*/
   /*border: 3px solid #61afef;
   border-left: 3px solid #56b6c2;
