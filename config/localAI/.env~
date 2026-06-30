@@ -1,0 +1,18 @@
+# ---- Edit these ----
+
+# Your GPU's gfx target, check with: rocminfo | grep gfx
+# RDNA2 (RX 6000) -> 10.3.0   RDNA3 (RX 7000) -> 11.0.0   RDNA4 (RX 9000) -> 12.0.0
+HSA_OVERRIDE_GFX_VERSION=11.0.0
+
+# Path to the GGUF file, relative to ./models/llm (which is mounted to /models in the container)
+LLM_MODEL_FILE=GLM-4.7-Flash-Q4_K_M.gguf
+
+LLM_CTX_SIZE=8192
+LLM_N_PARALLEL=2
+LLM_N_GPU_LAYERS=999
+
+# Any extra llama-server flags, space separated, added as-is to the command
+ADDITIONAL_COMMANDPARAMS=
+
+# Which ComfyUI ROCm image to use (rocm or rocm7)
+COMFYUI_IMAGE_TAG=rocm
