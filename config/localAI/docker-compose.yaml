@@ -9,11 +9,11 @@ services:
     volumes:
       - ./data/open-webui:/app/backend/data
     environment:
-      OPENAI_API_BASE_URL: "http://llama-server:8080/v1"
-      OPENAI_API_KEY: "nokey"        # llama.cpp ignores the key, but the field is required
+      OPENAI_BASE_URL: "http://llama-swap:8080/v1"
+      OPENAI_API_KEY: "nokey"
       WEBUI_AUTH: "true"
     depends_on:
-      - llama-cpp
+      - llama-swap
 
   # ---- Image / video generation (Krea 2, Wan, etc.) ----
   comfyui:
@@ -41,25 +41,17 @@ services:
       - seccomp=unconfined
     ipc: host
 
-  # ---- LLM inference (text) ----
-  llamacpp:
-    image: ghcr.io/ggml-org/llama.cpp:server-rocm
-    container_name: llamacpp
+  # ---- LLM inference (llama-swap proxy + llama-server ROCm) ----
+  # Models defined in 
+  llama-swap:
+    build: ./llama-swap
+    container_name: llama-swap
     restart: unless-stopped
     ports:
       - "8080:8080"
     volumes:
       - ./aimodels:/models
-    environment:
-      HSA_OVERRIDE_GFX_VERSION: "${HSA_OVERRIDE_GFX_VERSION}"
-    command: >
-      --model /models/${LLM_MODEL_FILE}
-      --ctx-size ${LLM_CTX_SIZE}
-      --parallel ${LLM_N_PARALLEL}
-      --n-gpu-layers ${LLM_N_GPU_LAYERS}
-      --host 0.0.0.0
-      --port 8080
-      ${ADDITIONAL_COMMANDPARAMS}
+      - ./llama-swap/config.yaml:/config/config.yaml #hot reloads on config change
     devices:
       - /dev/kfd
       - /dev/dri

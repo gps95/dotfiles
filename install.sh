@@ -8,7 +8,6 @@ echo "Creating symlinks..."
 ln -sf "$DOTFILES_DIR/config/bash/.bashrc" ~/.bashrc
 
 #Emacs
-mkdir
 ln -sf "$DOTFILES_DIR/config/emacs/init.el" ~/.config/emacs/init.el
 
 #Hyprland
@@ -23,7 +22,9 @@ ln -sf "$DOTFILES_DIR/config/kitty/kitty.conf" ~/.config/kitty/kitty.conf
 #LocalAI (llamacpp,openwebui,comfyui)
 mkdir -p ~/localAI
 ln -sf "$DOTFILES_DIR/config/localAI/.env" ~/localAI/.env
-ln -sf "$DOTFILES_DIR/config/localAI/docker-compose.yml" ~/localAI/docker-compose.yml
+ln -sf "$DOTFILES_DIR/config/localAI/.docker-compose.yaml" ~/localAI/docker-compose.yaml
+rm -rf ~/localAI/llama-swap
+ln -sf "$DOTFILES_DIR/config/localAI/llama-swap" ~/localAI/llama-swap
 
 #Waybar
 mkdir -p ~/.config/waybar
