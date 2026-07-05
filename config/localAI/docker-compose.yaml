@@ -42,25 +42,24 @@ services:
     ipc: host
 
   # ---- LLM inference (llama-swap proxy + llama-server ROCm) ----
-  # Models defined in 
   llama-swap:
-    build: ./llama-swap
+    image: ghcr.io/mostlygeek/llama-swap:vulkan
     container_name: llama-swap
     restart: unless-stopped
     ports:
       - "8080:8080"
     volumes:
       - ./aimodels:/models
-      - ./llama-swap/config.yaml:/config/config.yaml #hot reloads on config change
+      - ./llama-swap-config.yaml:/app/config.yaml #hot reloads on config change
     devices:
-      - /dev/kfd
+#      - /dev/kfd
       - /dev/dri
     group_add:
       - "${VIDEO_GID}"
       - "${RENDER_GID}"
-    security_opt:
-      - seccomp=unconfined
-    ipc: host
+#    security_opt:
+#      - seccomp=unconfined
+#    ipc: host
 
 networks:
   default:

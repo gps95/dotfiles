@@ -22,9 +22,8 @@ ln -sf "$DOTFILES_DIR/config/kitty/kitty.conf" ~/.config/kitty/kitty.conf
 #LocalAI (llamacpp,openwebui,comfyui)
 mkdir -p ~/localAI
 ln -sf "$DOTFILES_DIR/config/localAI/.env" ~/localAI/.env
-ln -sf "$DOTFILES_DIR/config/localAI/.docker-compose.yaml" ~/localAI/docker-compose.yaml
-rm -rf ~/localAI/llama-swap
-ln -sf "$DOTFILES_DIR/config/localAI/llama-swap" ~/localAI/llama-swap
+ln -sf "$DOTFILES_DIR/config/localAI/docker-compose.yaml" ~/localAI/docker-compose.yaml
+ln -sf "$DOTFILES_DIR/config/localAI/llama-swap-config.yaml" ~/localAI/llama-swap-config.yaml
 
 #Waybar
 mkdir -p ~/.config/waybar

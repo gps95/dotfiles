@@ -1,0 +1,15 @@
+# ${PORT} is assigned automatically
+# llama-server binary is at /app/llama-server in the vulkan image.
+
+healthCheckTimeout: 300
+globalTTL: 300
+
+models:
+  qwen3.6:
+    cmd: /app/llama-server --model /models/qwen3.6-35B-A3B-UD-Q4_K_M.gguf --port ${PORT} --n-gpu-layers 999 --ctx-size 64000 --n-cpu-moe 25
+
+#  gemma4k-12b:
+#    cmd: /app/llama-server --model /models/gemma-4-12b-Q4_K_M.gguf --port ${PORT} -ngl 999 --ctx-size 16384
+
+#  qwen25-coder-14b:
+#    cmd: /app/llama-server --model /models/qwen2.5-coder-14b-Q4_K_M.gguf --port ${PORT} -ngl 999 --ctx-size 32768 --temp 0.2
