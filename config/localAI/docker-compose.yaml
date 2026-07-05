@@ -9,7 +9,7 @@ services:
     volumes:
       - ./data/open-webui:/app/backend/data
     environment:
-      OPENAI_BASE_URL: "http://llama-swap:8080/v1"
+      OPENAI_API_BASE_URL: "http://llama-swap:8080/v1"
       OPENAI_API_KEY: "nokey"
       WEBUI_AUTH: "true"
     depends_on:
