@@ -4,9 +4,17 @@
 healthCheckTimeout: 300
 globalTTL: 300
 
+# num_ctx: 32k-32768 ; 64k-65536 ; 128k-131072 ; 256k-262144
+
 models:
   qwen3.6:
-    cmd: /app/llama-server --model /models/qwen3.6-35B-A3B-UD-Q4_K_M.gguf --port ${PORT} --n-gpu-layers 999 --ctx-size 64000 --n-cpu-moe 25
+    cmd: >-
+      /app/llama-server
+      --model /models/qwen3.6-35B-A3B-UD-Q4_K_M.gguf
+      --port ${PORT}
+      --n-gpu-layers 999
+      --ctx-size 65536
+      --n-cpu-moe 25
 
 #  gemma4k-12b:
 #    cmd: /app/llama-server --model /models/gemma-4-12b-Q4_K_M.gguf --port ${PORT} -ngl 999 --ctx-size 16384
