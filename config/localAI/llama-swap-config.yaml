@@ -4,20 +4,50 @@
 healthCheckTimeout: 300
 globalTTL: 300
 
-# num_ctx: 32k-32768 ; 64k-65536 ; 128k-131072 ; 256k-262144
+# num_ctx: 16k-16384 ; 32k-32768 ; 64k-65536 ; 128k-131072 ; 256k-262144
 
-models:
-  qwen3.6:
+models:      
+  qwen3.6-fastchat:
     cmd: >-
       /app/llama-server
       --model /models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf
       --port ${PORT}
+      
       --n-gpu-layers 999
-      --ctx-size 65536
+      --n-cpu-moe 18
+
+      --flash-attn on
+      --cache-type-k q4_0
+      --cache-type-v q4_0
+
+      --ctx-size 16384
+      
+  qwen3.6-general:
+    cmd: >-
+      /app/llama-server
+      --model /models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf
+      --port ${PORT}
+      
+      --n-gpu-layers 999
       --n-cpu-moe 25
 
-#  gemma4k-12b:
-#    cmd: /app/llama-server --model /models/gemma-4-12b-Q4_K_M.gguf --port ${PORT} -ngl 999 --ctx-size 16384
+      --flash-attn on
+      --cache-type-k q4_0
+      --cache-type-v q4_0
 
-#  qwen25-coder-14b:
-#    cmd: /app/llama-server --model /models/qwen2.5-coder-14b-Q4_K_M.gguf --port ${PORT} -ngl 999 --ctx-size 32768 --temp 0.2
+      --ctx-size 131072
+      
+  qwen3-coder:
+    cmd: >-
+      /app/llama-server
+      --model /models/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf
+      --port ${PORT}
+      
+      --n-gpu-layers 999
+      --n-cpu-moe 20
+      
+      --flash-attn on
+      --cache-type-k q8_0
+      --cache-type-v q8_0
+
+      --ctx-size 32768

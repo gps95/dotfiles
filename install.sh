@@ -12,18 +12,21 @@ ln -sf "$DOTFILES_DIR/config/emacs/init.el" ~/.config/emacs/init.el
 
 #Hyprland
 mkdir -p ~/.config/hypr
-ln -sf "$DOTFILES_DIR/config/hyprland/hyprland.conf" ~/.config/hypr/hyprland.conf
+ln -sf "$DOTFILES_DIR/config/hyprland/hyprland.lua" ~/.config/hypr/hyprland.lua
 ln -sf "$DOTFILES_DIR/config/hyprland/hyprpaper.conf" ~/.config/hypr/hyprpaper.conf
 
 #Kitty
 mkdir -p ~/.config/kitty
 ln -sf "$DOTFILES_DIR/config/kitty/kitty.conf" ~/.config/kitty/kitty.conf
 
-#LocalAI (llamacpp,openwebui,comfyui)
-mkdir -p ~/localAI
-ln -sf "$DOTFILES_DIR/config/localAI/.env" ~/localAI/.env
-ln -sf "$DOTFILES_DIR/config/localAI/docker-compose.yaml" ~/localAI/docker-compose.yaml
-ln -sf "$DOTFILES_DIR/config/localAI/llama-swap-config.yaml" ~/localAI/llama-swap-config.yaml
+#LocalAI (odysseus,llama-swap,stable-diffuse)
+mkdir -p ~/odysseus
+ln -sf "$DOTFILES_DIR/config/localAI/.env" ~/odysseus/.env
+ln -sf "$DOTFILES_DIR/config/localAI/docker-compose.override.yaml" ~/odysseus/docker-compose.override.yaml
+ln -sf "$DOTFILES_DIR/config/localAI/llama-swap-config.yaml" ~/odysseus/llama-swap-config.yaml
+ln -sf "$DOTFILES_DIR/config/localAI/switch.sh" ~/odysseus/switch.sh
+mkdir -p ~/odysseus/diffuse
+ln -sf "$DOTFILES_DIR/config/localAI/diffuse/Dockerfile" ~/odysseus/diffuse/Dockerfile
 
 #Waybar
 mkdir -p ~/.config/waybar

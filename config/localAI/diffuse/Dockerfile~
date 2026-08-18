@@ -1,0 +1,56 @@
+##### Build stage #####
+# Based on https://github.com/Medvidek77/stable-diffusion.cpp-rocm-docker,
+# built for sd-server (examples/server) only - no CLI, no throwaway files.
+FROM rocm/dev-ubuntu-24.04:latest AS build
+
+# Find your GPU target with `rocminfo | grep gfx` (e.g. gfx1030, gfx1100)
+ARG GPU_TARGET=gfx1030
+ARG SD_CPP_BRANCH=master
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    cmake \
+    ninja-build \
+    git \
+    hipblas-dev \
+    rocblas-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+RUN git clone --recursive --depth 1 --branch ${SD_CPP_BRANCH} \
+    https://github.com/leejet/stable-diffusion.cpp.git .
+
+RUN rm -rf build && mkdir build && cd build && \
+    cmake .. -G Ninja \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DSD_HIPBLAS=ON \
+      -DAMDGPU_TARGETS=${GPU_TARGET} \
+      -DCMAKE_POSITION_INDEPENDENT_CODE=ON && \
+    ninja sd-server
+
+##### Runtime stage #####
+# Alpine (musl) isn't usable here: the ROCm libraries copied in below
+# (libamdhip64, librocblas, libhipblas) are prebuilt against glibc, and
+# AMD doesn't ship/support a musl build of ROCm. Ubuntu 24.04 is kept to
+# match the build stage's glibc exactly and avoid ABI drift.
+FROM ubuntu:24.04 AS runtime
+
+ENV ROCM_PATH=/opt/rocm
+ENV LD_LIBRARY_PATH=${ROCM_PATH}/lib
+
+COPY --from=build /opt/rocm-*/lib /opt/rocm/lib
+
+# Only what sd-server needs at runtime: the amdgpu kernel-driver interface
+# (libdrm/libdrm-amdgpu), NUMA-aware allocation, and OpenMP.
+# No python, no ca-certificates, no -dev packages, no CLI binary.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libnuma1 libgomp1 libelf1 libdrm2 libdrm-amdgpu1 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /workspace
+
+COPY --from=build /app/build/bin/sd-server /usr/local/bin/sd-server
+RUN chmod +x /usr/local/bin/sd-server
+
+EXPOSE 8085
+ENTRYPOINT ["/usr/local/bin/sd-server"]
+CMD ["--listen-port", "8085"]

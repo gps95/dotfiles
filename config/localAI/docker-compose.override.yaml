@@ -1,0 +1,74 @@
+services:     
+  # ---- LLM inference (llama-swap proxy + llama-server ROCm) ----
+  llama-swap:
+    image: ghcr.io/mostlygeek/llama-swap:vulkan
+    container_name: llama-swap
+    restart: unless-stopped
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./aimodels:/models
+      - ./llama-swap-config.yaml:/app/config.yaml #hot reloads on config change
+    devices:
+      - /dev/kfd
+      - /dev/dri
+    group_add:
+      - "${VIDEO_GID}"
+      - "${RENDER_GID}"
+#    security_opt:
+#      - seccomp=unconfined
+#    ipc: host
+
+  # ---- Stable diffusion ----
+  stable-diffusion:
+    build:
+      context: ./diffuse
+      args:
+        GPU_TARGET: gfx1101 # <-- set to your card, `rocminfo | grep gfx`
+    container_name: stable-diffusion
+    restart: unless-stopped
+    devices:
+      - /dev/kfd
+      - /dev/dri
+    group_add:
+      - video
+      - render
+#    security_opt:
+#      - seccomp=unconfined
+#    ipc: host
+    volumes:
+      - ./aimodels:/workspace/models:ro
+      - ./sd_outputs:/workspace/outputs
+    ports:
+      - "8085:8085"
+    # Edit this to point at whichever model you want loaded on startup.
+    # Restart the container (--force-recreate) to switch models.
+    command:
+      - "--listen-ip"
+      - "0.0.0.0"
+      - "--listen-port"
+      - "8085"
+      - "--diffusion-model"
+      - "/workspace/models/krea2/Krea-2-Turbo-Q4_K_M.gguf"
+      - "--llm"
+      - "/workspace/models/krea2/Qwen3-VL-4B-Instruct-Q4_K_M.gguf"
+      - "--vae"
+      - "/workspace/models/krea2/wan_2.1_vae.safetensors"
+      - "--vae-tiling"
+      - "--lora-model-dir"
+      - "/workspace/models/krea2/lora"
+      - "--diffusion-fa" # flash attention for the diffusion transformer, lowers VRAM use
+      - "--steps"
+      - "8" #Krea2 turbo is distilled for 8 step inference
+      - "--cfg-scale"
+      - "1" #Turbo runs without cfg, 1 to disable
+      - "--guidance"
+      - "1" #Turbo runs without guidance, 1 to disable
+      - "--flow-shift"
+      - "1.15" # pinned mu value Krea recommends for turbo
+      - "-H"
+      - "1024"
+      - "-W"
+      - "1024"
+
+    
