@@ -7,12 +7,16 @@ echo "Creating symlinks..."
 #Bash
 ln -sf "$DOTFILES_DIR/config/bash/.bashrc" ~/.bashrc
 
+#Dunst
+ln -sf "$DOTFILES_DIR/config/dunst/dunstrc" ~/.config/dunst/dunstrc
+
 #Emacs
 ln -sf "$DOTFILES_DIR/config/emacs/init.el" ~/.config/emacs/init.el
 
 #Hyprland
 mkdir -p ~/.config/hypr
 ln -sf "$DOTFILES_DIR/config/hyprland/hyprland.lua" ~/.config/hypr/hyprland.lua
+ln -sf "$DOTFILES_DIR/config/hyprland/hyprland.conf" ~/.config/hypr/hyprland.conf
 ln -sf "$DOTFILES_DIR/config/hyprland/hyprpaper.conf" ~/.config/hypr/hyprpaper.conf
 
 #Kitty
