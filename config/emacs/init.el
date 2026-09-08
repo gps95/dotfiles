@@ -17,6 +17,15 @@
   display-line-numbers-type 'relative ;relative line numbers
 )
 
+;; Search match counter
+(setq isearch-lazy-count t)
+(setq lazy-count-prefix-format "(%s/%s) ")
+(setq lazy-count-suffix-format nil)
+
+;; Make regular Isearch interpret the empty space as a Regexp
+;; To match every char between the words you give it
+(setq search-whitespace-regexp ".*?")
+
 ;;IDO (Interactive Do)
 ;For autocompletion on C-x C-f and such
 (ido-mode 1)

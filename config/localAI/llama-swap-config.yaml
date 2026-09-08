@@ -6,30 +6,95 @@ globalTTL: 300
 
 # num_ctx: 16k-16384 ; 32k-32768 ; 64k-65536 ; 128k-131072 ; 256k-262144
 
-models:      
-  qwen3.6-fastchat:
+models:
+  #Dense model, has 64 layers
+  qwen3.8-bare:
     cmd: >-
       /app/llama-server
-      --model /models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf
+      --model /models/Qwen/Qwen3.8/Qwen3.8-27B-UD-IQ4_XS.gguf
       --port ${PORT}
       
-      --n-gpu-layers 999
-      --n-cpu-moe 18
+      --n-gpu-layers 64
+      --threads 8
+      --threads-batch 8
 
+      --reasoning-effort medium
+      --parallel 1
+      
       --flash-attn on
+      --no-mmap
+      --no-mmproj
+      
       --cache-type-k q4_0
       --cache-type-v q4_0
+      --ctx-size 65536
 
-      --ctx-size 16384
-      
-  qwen3.6-general:
+  #Dense model, has 64 layers
+  qwen3.8-no-vision:
     cmd: >-
       /app/llama-server
-      --model /models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf
+      --model /models/Qwen/Qwen3.8/Qwen3.8-27B-UD-IQ4_XS.gguf
+      --model-draft /models/Qwen/Qwen3.8/mtp-Qwen3.8-27B-Q4_0.gguf
+      --port ${PORT}
+      
+      --n-gpu-layers 60
+      --n-gpu-layers-draft 99 
+      --threads 8
+      --threads-batch 8
+      
+      --spec-type draft-mtp
+      --spec-draft-n-max 1
+      --spec-draft-p-min 0.7
+      --parallel 1
+
+      --reasoning-effort medium
+      
+      --flash-attn on
+      --no-mmap
+      --no-mmproj
+      
+      --cache-type-k q4_0
+      --cache-type-v q4_0
+      --ctx-size 65536
+
+  #Dense Model, has 64 layers
+  qwen3.8:
+    cmd: >-
+      /app/llama-server
+      --model /models/Qwen/Qwen3.8/Qwen3.8-27B-UD-IQ4_XS.gguf
+      --model-draft /models/Qwen/Qwen3.8/mtp-Qwen3.8-27B-Q4_0.gguf
+      --port ${PORT}
+      
+      --n-gpu-layers 55
+      --n-gpu-layers-draft 99 
+      --threads 8
+      --threads-batch 8
+      
+      --spec-type draft-mtp
+      --spec-draft-n-max 1
+      --spec-draft-p-min 0.7
+      --parallel 1
+
+      --reasoning-effort medium
+      
+      --flash-attn on
+      --no-mmap
+      
+      --cache-type-k q4_0
+      --cache-type-v q4_0
+      --ctx-size 65536
+      
+  #MoE Model
+  qwen3.6:
+    cmd: >-
+      /app/llama-server
+      --model /models/Qwen/Qwen3.6/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf
       --port ${PORT}
       
       --n-gpu-layers 999
       --n-cpu-moe 25
+
+      --parallel 1
 
       --flash-attn on
       --cache-type-k q4_0
@@ -40,11 +105,13 @@ models:
   qwen3-coder:
     cmd: >-
       /app/llama-server
-      --model /models/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf
+      --model /models/Qwen/QwenCoder/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf
       --port ${PORT}
       
       --n-gpu-layers 999
       --n-cpu-moe 20
+
+      --parallel 1
       
       --flash-attn on
       --cache-type-k q8_0

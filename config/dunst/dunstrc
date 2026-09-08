@@ -1,2 +1,7 @@
 [global]
-monitor = 1
+  monitor = 1
+  #mouse: follow mouse pointer
+  #keyboard: follow window with keyboard focus
+  #none: don't follow anything
+  #all of these override the monitor option 
+  follow = mouse
