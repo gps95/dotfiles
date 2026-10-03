@@ -16,18 +16,19 @@ services:
       - "${VIDEO_GID}"
       - "${RENDER_GID}"
 
-  # ---- Pi agent harness ----
-  pi:
-    build:
-      context: ./pi
-    image: pi-sandbox:latest
-    stdin_open: true         # Pi is an interactive TUI
-    tty: true
-    volumes:
-      - ./piworkspace:/workspace           # project Pi can read/modify
-      - ./piconfig:/home/node/.pi/agent    # credentials, settings, sessions
+#  # ---- Pi agent harness ----
+#  pi:
+#    build:
+#      context: ./pi
+#    container_name: pi
+#    entrypoint: ["sleep", "infinity"]
+#    init: true                 # reap zombie processes from Pi's child shells
+#    restart: unless-stopped    # survives reboots and Docker daemon restarts
+#    volumes:
+#      - ./piworkspace:/workspace           # project Pi can read/modify
+#      - ./piconfig:/home/node/.pi/agent    # credentials, settings, sessions
 
-#  # ---- Stable diffusion ----
+#  # ---- Stable diffusion ---- no longer needed due to llama-swap shipping with it on unified-vulkancld
 #  stable-diffusion:
 #    build:
 #      context: ./diffuse
