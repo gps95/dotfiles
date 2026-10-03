@@ -24,13 +24,16 @@ mkdir -p ~/.config/kitty
 ln -sf "$DOTFILES_DIR/config/kitty/kitty.conf" ~/.config/kitty/kitty.conf
 
 #LocalAI (odysseus,llama-swap,stable-diffuse)
-mkdir -p ~/odysseus
-ln -sf "$DOTFILES_DIR/config/localAI/.env" ~/odysseus/.env
-ln -sf "$DOTFILES_DIR/config/localAI/docker-compose.override.yaml" ~/odysseus/docker-compose.override.yaml
-ln -sf "$DOTFILES_DIR/config/localAI/llama-swap-config.yaml" ~/odysseus/llama-swap-config.yaml
-ln -sf "$DOTFILES_DIR/config/localAI/switch.sh" ~/odysseus/switch.sh
-mkdir -p ~/odysseus/diffuse
-ln -sf "$DOTFILES_DIR/config/localAI/diffuse/Dockerfile" ~/odysseus/diffuse/Dockerfile
+LOCALAIDIR=localAi
+mkdir -p ~/$LOCALAIDIR
+ln -sf "$DOTFILES_DIR/config/localAI/.env" ~/$LOCALAIDIR/.env
+ln -sf "$DOTFILES_DIR/config/localAI/docker-compose.yaml" ~/$LOCALAIDIR/docker-compose.yaml
+ln -sf "$DOTFILES_DIR/config/localAI/llama-swap-config.yaml" ~/$LOCALAIDIR/llama-swap-config.yaml
+ln -sf "$DOTFILES_DIR/config/localAI/switch.sh" ~/$LOCALAIDIR/switch.sh
+mkdir -p ~/$LOCALAIDIR/diffuse
+ln -sf "$DOTFILES_DIR/config/localAI/diffuse/Dockerfile" ~/$LOCALAIDIR/diffuse/Dockerfile
+mkdir -p ~/$LOCALAIDIR/pi
+ln -sf "$DOTFILES_DIR/config/localAI/pi/Dockerfile" ~/$LOCALAIDIR/pi/Dockerfile
 
 #Waybar
 mkdir -p ~/.config/waybar

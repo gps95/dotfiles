@@ -10,7 +10,7 @@ models:
   #Dense model, has 64 layers
   qwen3.8-bare:
     cmd: >-
-      /app/llama-server
+      llama-server
       --model /models/Qwen/Qwen3.8/Qwen3.8-27B-UD-IQ4_XS.gguf
       --port ${PORT}
       
@@ -32,7 +32,7 @@ models:
   #Dense model, has 64 layers
   qwen3.8-no-vision:
     cmd: >-
-      /app/llama-server
+      llama-server
       --model /models/Qwen/Qwen3.8/Qwen3.8-27B-UD-IQ4_XS.gguf
       --model-draft /models/Qwen/Qwen3.8/mtp-Qwen3.8-27B-Q4_0.gguf
       --port ${PORT}
@@ -60,7 +60,7 @@ models:
   #Dense Model, has 64 layers
   qwen3.8:
     cmd: >-
-      /app/llama-server
+      llama-server
       --model /models/Qwen/Qwen3.8/Qwen3.8-27B-UD-IQ4_XS.gguf
       --model-draft /models/Qwen/Qwen3.8/mtp-Qwen3.8-27B-Q4_0.gguf
       --port ${PORT}
@@ -87,7 +87,7 @@ models:
   #MoE Model
   qwen3.6:
     cmd: >-
-      /app/llama-server
+      llama-server
       --model /models/Qwen/Qwen3.6/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf
       --port ${PORT}
       
@@ -104,7 +104,7 @@ models:
       
   qwen3-coder:
     cmd: >-
-      /app/llama-server
+      llama-server
       --model /models/Qwen/QwenCoder/Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf
       --port ${PORT}
       

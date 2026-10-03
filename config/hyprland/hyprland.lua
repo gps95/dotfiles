@@ -158,7 +158,7 @@ hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
-local mainMod = "ALT"
+local mainMod = "SUPER"
 
 -- Game mode toggle (submap)
 hl.bind(mainMod .. " + M", function()
