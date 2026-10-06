@@ -23,17 +23,19 @@ ln -sf "$DOTFILES_DIR/config/hyprland/hyprpaper.conf" ~/.config/hypr/hyprpaper.c
 mkdir -p ~/.config/kitty
 ln -sf "$DOTFILES_DIR/config/kitty/kitty.conf" ~/.config/kitty/kitty.conf
 
-#LocalAI (odysseus,llama-swap,stable-diffuse)
+#LocalAI (llama-swap,pi harness)
 LOCALAIDIR=localAi
 mkdir -p ~/$LOCALAIDIR
 ln -sf "$DOTFILES_DIR/config/localAI/.env" ~/$LOCALAIDIR/.env
 ln -sf "$DOTFILES_DIR/config/localAI/docker-compose.yaml" ~/$LOCALAIDIR/docker-compose.yaml
 ln -sf "$DOTFILES_DIR/config/localAI/llama-swap-config.yaml" ~/$LOCALAIDIR/llama-swap-config.yaml
 ln -sf "$DOTFILES_DIR/config/localAI/switch.sh" ~/$LOCALAIDIR/switch.sh
-mkdir -p ~/$LOCALAIDIR/diffuse
-ln -sf "$DOTFILES_DIR/config/localAI/diffuse/Dockerfile" ~/$LOCALAIDIR/diffuse/Dockerfile
+#mkdir -p ~/$LOCALAIDIR/diffuse
+#ln -sf "$DOTFILES_DIR/config/localAI/diffuse/Dockerfile" ~/$LOCALAIDIR/diffuse/Dockerfile
 mkdir -p ~/$LOCALAIDIR/pi
+mkdir -p ~/$LOCALAIDIR/pi-home/agent
 ln -sf "$DOTFILES_DIR/config/localAI/pi/Dockerfile" ~/$LOCALAIDIR/pi/Dockerfile
+ln -sf "$DOTFILES_DIR/config/localAI/pi/models.json" ~/$LOCALAIDIR/pi-home/agent/models.json
 
 #Waybar
 mkdir -p ~/.config/waybar

@@ -24,3 +24,17 @@ PS1='\[\033[0;33m\][\u@\h \W ]\$\[\033[0m\] '
 
 #To autostart the ssh-agent for git:
 eval $(keychain --eval --quiet githubgps95)
+
+# Pi
+pi() {
+  local compose=~/localAi/docker-compose.yaml
+
+  if [ "$1" = "update" ]; then
+    docker exec pi pi update
+  return
+  fi
+
+  mkdir -p ~/pi-home
+  PI_WORKDIR=$PWD docker compose -f "$compose" --profile tools up -d pi || return 1
+  docker exec -it -u "$(id -u):$(id -g)" pi pi "$@"
+}

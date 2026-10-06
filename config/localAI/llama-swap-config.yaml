@@ -22,7 +22,7 @@ models:
       --parallel 1
       
       --flash-attn on
-      --no-mmap
+      --load-mode none
       --no-mmproj
       
       --cache-type-k q4_0
@@ -50,7 +50,7 @@ models:
       --reasoning-effort medium
       
       --flash-attn on
-      --no-mmap
+      --load-mode none
       --no-mmproj
       
       --cache-type-k q4_0
@@ -78,7 +78,7 @@ models:
       --reasoning-effort medium
       
       --flash-attn on
-      --no-mmap
+      --load-mode none
       
       --cache-type-k q4_0
       --cache-type-v q4_0

@@ -1,0 +1,14 @@
+{
+  "providers": {
+    "llama-swap": {
+      "baseUrl": "http://localhost:8081/v1",
+      "api": "openai-completions",
+      "apiKey": "local",
+      "models": [
+        { "id": "qwen3.8-bare","contextWindow":65536},
+        { "id": "qwen3.8","contextWindow":65536},
+        { "id": "qwen3-coder","contextWindow":32768}
+      ]
+    }
+  }
+}

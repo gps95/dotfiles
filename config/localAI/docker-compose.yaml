@@ -15,18 +15,30 @@ services:
     group_add:
       - "${VIDEO_GID}"
       - "${RENDER_GID}"
+    networks: [ai]
 
-#  # ---- Pi agent harness ----
-#  pi:
-#    build:
-#      context: ./pi
-#    container_name: pi
-#    entrypoint: ["sleep", "infinity"]
-#    init: true                 # reap zombie processes from Pi's child shells
-#    restart: unless-stopped    # survives reboots and Docker daemon restarts
-#    volumes:
-#      - ./piworkspace:/workspace           # project Pi can read/modify
-#      - ./piconfig:/home/node/.pi/agent    # credentials, settings, sessions
+  # ---- Pi agent harness ----
+  pi:
+    profiles: [tools]            # not started by a plain "docker compose up"
+    container_name: pi
+    image: pi-sandbox
+    build:
+      context: ./pi
+    entrypoint: ["sleep", "infinity"]
+    restart: unless-stopped
+    user: "${PI_UID}:${PI_GID}"
+    working_dir: /workspace
+    volumes:
+      - ${PI_WORKDIR:-.}:/workspace
+      - ./pi-home:/home/pi/.pi/agent
+      - pi-npm:/home/pi/.npm-global
+    networks: [ai]
+
+volumes:
+  pi-npm:
+
+networks:
+  ai:
 
 #  # ---- Stable diffusion ---- no longer needed due to llama-swap shipping with it on unified-vulkancld
 #  stable-diffusion:
