@@ -1,0 +1,10 @@
+# Emacs backup/autosave files
+*.~
+*~
+.#*
+.#*#
+\#*\#
+
+# Docker
+localAi/aimodels/
+localAi/pi-home/
