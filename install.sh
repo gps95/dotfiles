@@ -35,7 +35,7 @@ ln -sf "$DOTFILES_DIR/config/localAI/switch.sh" ~/$LOCALAIDIR/switch.sh
 mkdir -p ~/$LOCALAIDIR/pi
 mkdir -p ~/$LOCALAIDIR/pi-home/agent
 ln -sf "$DOTFILES_DIR/config/localAI/pi/Dockerfile" ~/$LOCALAIDIR/pi/Dockerfile
-ln -sf "$DOTFILES_DIR/config/localAI/pi/models.json" ~/$LOCALAIDIR/pi-home/agent/models.json
+cp -f "$DOTFILES_DIR/config/localAI/pi/models.json" ~/$LOCALAIDIR/pi-home/agent/models.json
 
 #Waybar
 mkdir -p ~/.config/waybar

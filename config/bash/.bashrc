@@ -34,6 +34,11 @@ pi() {
   return
   fi
 
+  if [ "$1" = "it" ]; then
+    docker exec -it pi bash
+  return
+  fi
+
   mkdir -p ~/pi-home
   PI_WORKDIR=$PWD docker compose -f "$compose" --profile tools up -d pi || return 1
   docker exec -it -u "$(id -u):$(id -g)" pi pi "$@"

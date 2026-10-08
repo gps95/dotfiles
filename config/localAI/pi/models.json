@@ -1,7 +1,7 @@
 {
   "providers": {
     "llama-swap": {
-      "baseUrl": "http://localhost:8081/v1",
+      "baseUrl": "http://llama-swap:8080/v1",
       "api": "openai-completions",
       "apiKey": "local",
       "models": [

@@ -30,7 +30,7 @@ services:
     working_dir: /workspace
     volumes:
       - ${PI_WORKDIR:-.}:/workspace
-      - ./pi-home:/home/pi/.pi/agent
+      - ./pi-home:/home/pi/.pi
       - pi-npm:/home/pi/.npm-global
     networks: [ai]
 
