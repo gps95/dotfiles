@@ -1,1 +1,1 @@
-sudo pacman -Syu dunst emacs kyprpaper kitty waybar wofi thunar firefox dust fastfetch docker ttf-nerd-fonts-symbols ttf-iosevka-nerd remmina freecad steam cutefish-calculator htop bitwarden mullvad-vpn yazi
+sudo pacman -Syu dunst emacs hyprpaper kitty waybar wofi thunar firefox dust fastfetch docker ttf-nerd-fonts-symbols ttf-iosevka-nerd remmina code freecad steam htop bitwarden mullvad-vpn yazi
