@@ -143,8 +143,9 @@ hl.config({
 ---------------
 hl.config({
     input = {
-        kb_layout = "us",
-        kb_variant = "intl",
+        kb_layout = "us,de",
+	kb_variant = "intl,",
+	kb_options = "grp:shift_caps_toggle",
         follow_mouse = 1,
         sensitivity = 0,
         touchpad = {
