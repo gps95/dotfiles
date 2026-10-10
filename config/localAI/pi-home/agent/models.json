@@ -6,8 +6,7 @@
       "apiKey": "local",
       "models": [
         { "id": "qwen3.8-bare","contextWindow":65536},
-        { "id": "qwen3.8","contextWindow":65536},
-        { "id": "qwen3-coder","contextWindow":32768}
+        { "id": "qwen3.8","contextWindow":65536}
       ]
     }
   }

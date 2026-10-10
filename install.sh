@@ -18,7 +18,8 @@ ln -sf "$DOTFILES_DIR/config/fontconfig/fonts.conf" ~/.config/fontconfig/fonts.c
 mkdir -p ~/.config/hypr
 ln -sf "$DOTFILES_DIR/config/hyprland/hyprland.lua" ~/.config/hypr/hyprland.lua
 ln -sf "$DOTFILES_DIR/config/hyprland/hyprpaper.conf" ~/.config/hypr/hyprpaper.conf
-mkdir -p ~/BACKGROUND # wallpaper dir, add your images here
+mkdir -p ~/BACKGROUND
+ln -sf "$DOTFILES_DIR/config/hyprland/BACKGROUND" ~/BACKGROUND
 
 #Kitty
 mkdir -p ~/.config/kitty
