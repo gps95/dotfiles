@@ -28,6 +28,9 @@ mullvad-vpn
 dust
 fastfetch
 htop
+btop
+bluetui
+impala
 
 #Fonts
 ttf-nerd-fonts-symbols

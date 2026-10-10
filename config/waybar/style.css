@@ -60,7 +60,6 @@ window#waybar.hidden {
 #temperature,
 #backlight,
 #network,
-#pulseaudio,
 #wireplumber,
 #custom-media,
 #custom-temps,
@@ -69,7 +68,9 @@ window#waybar.hidden {
 #idle_inhibitor,
 #scratchpad,
 #power-profiles-daemon,
-#mpd {
+#mpd,
+#bluetooth,
+#volume{
   padding: 0px 10px;
   margin: 6px 0px;
   background-color: #292d35;
@@ -87,72 +88,41 @@ window#waybar.hidden {
     margin-right: 0;
 }*/
 
-/* === Workspaces ==========================================================*/
-/*HAVE NOT IMPLEMENTED THIS YET IN MY CASE*/
-/*
-PEW
-#workspaces {
-  background-color: transparent;
-  padding-left: 40px;
+/* === Volume Slider ==========================================================*/
+
+#pulseaudio
+{
+  border: 0;
 }
 
-#workspaces button {
-  all: initial;
+#pulseaudio-slider {
+  padding: 0px;
+  margin: 0px;
+  margin-left: 8px;
+  min-width: 100px;
+}
+
+#pulseaudio-slider slider {
+  all: unset;
+  min-height: 0;
   min-width: 0;
-  box-shadow: inherit;
-  padding: 6px 6px;
-  margin: 6px 3px;
-  border-radius: 4px;
-  background-color: #2e3440;
-  color: #56b6c2;
+  opacity: 0;
+  background-image: none;
+  border: none;
+  box-shadow: none;
 }
 
-#workspaces button.active {
-  color: #fab387;
-  background-color: #56b6c2;
+/*Override hover: keep border removed, but let the global *:hover
+  background/color (orange hover colors) apply instead of being reset */
+#pulseaudio-slider:hover {
+  border: 0;
+  background-color: #292d35;
 }
 
-#workspaces button:hover {
-  color: #2e3440;
-  background-color: #56b6c2;
-}*/
-
-/* === Custom Workspace Labels ============================================= */
-
-/*#custom-work-left,
-#custom-work-right {
-  padding: 6px 6px;
-  margin: 6px 3px;
+#pulseaudio-slider trough:hover
+{ 
+  background-color: #fab387;
 }
-
-#custom-workspace-1:hover,
-#custom-workspace-2:hover,
-#custom-workspace-3:hover,
-#custom-workspace-4:hover {
-  color: #fab387; 
-  transition: all 0.2s ease-in-out;
-}*/
-
-/*
-MINE
-#workspaces button {
-    padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;
-}
-
-#workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
-}
-
-#workspaces button.focused, #workspaces button.active {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
-}
-
-#workspaces button.urgent {
-    background-color: #eb4d4b;
-}*/
 
 /* === Special Widget States ==================================== */
 

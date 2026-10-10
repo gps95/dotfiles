@@ -19,7 +19,9 @@
     "modules-right": [
     //    "mpd",
     //    "idle_inhibitor",
-        "pulseaudio",
+        "group/volume",
+        "custom/battery",
+        "bluetooth",
         "network",
     //    "power-profiles-daemon",
         "cpu",
@@ -135,11 +137,15 @@
 	}
     },
     "cpu": {
-        "format": "{usage}% "
+      "format": "{usage}% ",
+      "interval": 10,
+      "on-click": "exec kitty btop"
     },
     "memory": {
       "format": "{}% ",
-      "tooltip-format": "{used} GB / {total} GB" 
+      "tooltip-format": "{used} GB / {total} GB",
+      "interval": 30,
+      "on-click": "exec kitty htop"
     },
     "custom/temps":{
        "exec": "~/.config/waybar/scripts/temps.sh",
@@ -189,33 +195,54 @@
     //  }
     //},
     "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} 󰊗",
-        "tooltip-format": "{ifname} via {gwaddr} 󰊗",
-        "format-linked": "{ifname} (No IP) 󰊗",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+      "format": "",
+      "format-wifi": "",
+      "format-ethernet": "󰊗",
+      "format-disconnected": "",
+      "tooltip-format": "{ifname} via {gwaddr}  󰊗",
+      "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+      "tooltip-format-ethernet": "{ifname} 󰊗",
+      "tooltip-format-disconnected": "",
+      "max-length": 50,
+      "on-click": "exec kitty impala"
     },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": "󰅶 {icon} {format_source}",
-        "format-muted": "󰅶 {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
+        "format": "{volume}% {icon}",
+        "format-muted": "󰅶",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "󰥰",
-            "headset": "󰋎",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
+            "default": ["", ""]
         },
+        "scroll-step": 1,
         "on-click": "pavucontrol"
+    },
+    "pulseaudio/slider": {
+        "min": 0,
+        "max": 100,
+        "orientation": "horizontal"
+    },
+    "group/volume": {
+      "orientation": "horizontal",
+      "modules": [
+        "pulseaudio",
+        "pulseaudio/slider"
+      ]
+    },
+    "bluetooth": {
+      "format": "",
+      "format-disabled": "", // empty format hides the module
+      "format-connected": " {num_connections}",
+      "tooltip-format": "{controller_alias}\t{controller_address}",
+      "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+      "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+      "on-click": "exec kitty --title bluetui bluetui"
+    },
+    "custom/battery": {
+        "exec-if": "ls -d /sys/class/power_supply/BAT* >/dev/null 2>&1",
+        "exec": "~/.config/waybar/scripts/battery.sh",
+        "return-type": "json",
+        "interval": 60
     }
+
     //"custom/media": {
     //    "format": "{icon} {text}",
     //    "return-type": "json",
