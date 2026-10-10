@@ -23,7 +23,6 @@ docker-compose
 remmina 
 bitwarden 
 mullvad-vpn
-emacs
 
 #Useful cli stuff
 dust

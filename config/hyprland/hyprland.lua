@@ -30,7 +30,7 @@ hl.config({
 ---- MY PROGRAMS ----
 ---------------------
 local terminal = "kitty"
-local fileManager = "yazi"
+local fileManager = "kitty yazi ~"
 local menu = "wofi --show drun"
 
 -------------------
