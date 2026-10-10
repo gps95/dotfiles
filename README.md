@@ -11,9 +11,11 @@ config/
 ├── fontconfig/  fonts.conf — Iosevka as default font system-wide
 ├── hyprland/    hyprland.lua (Lua config), hyprpaper.conf
 ├── kitty/       blue/orange kitty theme
-├── localAI/     llama-swap docker-compose + models config, pi container
+├── localAI/     llama-swap docker-compose + models config, pi container,
+│                pi-home/ (agent models.json + extensions)
 ├── waybar/      waybar config, style, temps script
 └── wofi/        wofi app launcher config/style
+deps_install.sh  pacman deps + docker group
 install.sh       symlinks everything into place
 ```
 
@@ -24,8 +26,6 @@ install.sh       symlinks everything into place
 - **File manager**: yazi (launched with `SUPER+E`)
 - **Local AI** (all in docker, ROCm/Vulkan on AMD):
   - `llama-swap` (unified-vulkan image) serving local GGUF models on port 8081
-    - LLMs: Qwen3.8 (bare + Qwen3-Embedding reranker), Qwen3-Coder-30B
-    - Image gen: `krea2-turbo` (Krea-2-Turbo GGUF + Qwen3-VL-4B, served by the sd-server built into the unified image; OpenAI-compatible `/v1/images/generations`)
   - `pi` — the [pi](https://github.com/earendil-works/pi) coding agent running in a sandbox container, pointed at llama-swap (behind the `tools` compose profile)
 
 ## Install
@@ -33,10 +33,11 @@ install.sh       symlinks everything into place
 ```sh
 git clone git@github.com:gps95/dotfiles ~/dotfiles
 cd ~/dotfiles
+./deps_install.sh   # optional: pacman packages (kitty, hyprland deps, yazi, docker, ...) + docker group
 ./install.sh
 ```
 
-`install.sh` symlinks the configs into `~/.config` and `~`, creates `~/BACKGROUND` (drop wallpaper images there), then reloads Hyprland.
+`install.sh` symlinks the configs into `~/.config` and `~`, copies the pi agent state (`config/localAI/pi-home/agent`) to `~/localAi/pi-home/`, creates `~/BACKGROUND` (drop wallpaper images there), then reloads Hyprland.
 The `localAI/` stuff is symlinked to `~/localAi/` — you'll need docker and a local model folder (`~/localAi/aimodels`) before `docker compose up` will work.
 
 ## Notes / adapt to your machine
