@@ -30,7 +30,7 @@ hl.config({
 ---- MY PROGRAMS ----
 ---------------------
 local terminal = "kitty"
-local fileManager = "thunar"
+local fileManager = "yazi"
 local menu = "wofi --show drun"
 
 -------------------
@@ -47,8 +47,12 @@ end)
 -------------------------------
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
--- (GDK_SCALE / QT_SCALE_FACTOR / QT_AUTO_SCREEN_SCALE_FACTOR / XWAYLAND_SCALE were
--- dropped here — see explanation below.)
+-- HiDPI settings: apps should not apply their own scaling on top of the
+-- monitor scale factors set above (xwayland force_zero_scaling handles X apps)
+hl.env("GDK_SCALE", "1")
+hl.env("QT_SCALE_FACTOR", "1")
+hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
+hl.env("XWAYLAND_SCALE", "1")
 
 -----------------------
 ---- LOOK AND FEEL ----
@@ -154,8 +158,6 @@ hl.config({
     },
 })
 
-hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
-
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
@@ -176,7 +178,7 @@ end)
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("emacs"))
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd("code"))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))

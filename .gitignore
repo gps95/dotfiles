@@ -8,3 +8,6 @@
 # Docker
 localAi/aimodels/
 localAi/pi-home/
+
+# pi sessions
+pi-session*

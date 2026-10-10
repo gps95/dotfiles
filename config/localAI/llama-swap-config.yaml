@@ -7,6 +7,26 @@ globalTTL: 300
 # num_ctx: 16k-16384 ; 32k-32768 ; 64k-65536 ; 128k-131072 ; 256k-262144
 
 models:
+  #Image generation: sd-server ships inside the unified-vulkan image
+  #(replaces the old diffuse/stable-diffusion container)
+  krea2-turbo:
+    cmd: >-
+      sd-server
+      --listen-ip 127.0.0.1 --listen-port ${PORT}
+
+      --diffusion-model /models/krea2/Krea-2-Turbo-Q4_K_M.gguf
+      --llm /models/krea2/Qwen3-VL-4B-Instruct-Q4_K_M.gguf
+      --vae /models/krea2/wan_2.1_vae.safetensors
+      --vae-tiling
+      --lora-model-dir /models/krea2/lora
+      --diffusion-fa # flash attention for the diffusion transformer, lowers VRAM use
+      --steps 8 # Krea2 turbo is distilled for 8 step inference
+      --cfg-scale 1 # turbo runs without cfg, 1 to disable
+      --guidance 1 # turbo runs without guidance, 1 to disable
+      --flow-shift 1.15 # pinned mu value Krea recommends for turbo
+      -H 1024
+      -W 1024
+
   #Dense model, has 64 layers
   qwen3.8-bare:
     cmd: >-
@@ -20,34 +40,6 @@ models:
 
       --reasoning-effort medium
       --parallel 1
-      
-      --flash-attn on
-      --load-mode none
-      --no-mmproj
-      
-      --cache-type-k q4_0
-      --cache-type-v q4_0
-      --ctx-size 65536
-
-  #Dense model, has 64 layers
-  qwen3.8-no-vision:
-    cmd: >-
-      llama-server
-      --model /models/Qwen/Qwen3.8/Qwen3.8-27B-UD-IQ4_XS.gguf
-      --model-draft /models/Qwen/Qwen3.8/mtp-Qwen3.8-27B-Q4_0.gguf
-      --port ${PORT}
-      
-      --n-gpu-layers 60
-      --n-gpu-layers-draft 99 
-      --threads 8
-      --threads-batch 8
-      
-      --spec-type draft-mtp
-      --spec-draft-n-max 1
-      --spec-draft-p-min 0.7
-      --parallel 1
-
-      --reasoning-effort medium
       
       --flash-attn on
       --load-mode none
@@ -83,24 +75,6 @@ models:
       --cache-type-k q4_0
       --cache-type-v q4_0
       --ctx-size 65536
-      
-  #MoE Model
-  qwen3.6:
-    cmd: >-
-      llama-server
-      --model /models/Qwen/Qwen3.6/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf
-      --port ${PORT}
-      
-      --n-gpu-layers 999
-      --n-cpu-moe 25
-
-      --parallel 1
-
-      --flash-attn on
-      --cache-type-k q4_0
-      --cache-type-v q4_0
-
-      --ctx-size 131072
       
   qwen3-coder:
     cmd: >-

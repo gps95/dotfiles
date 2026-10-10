@@ -22,9 +22,6 @@ PS1='\[\033[0;33m\][\u@\h \W ]\$\[\033[0m\] '
 
 #You have to escape most stuff with \
 
-#To autostart the ssh-agent for git:
-eval $(keychain --eval --quiet githubgps95)
-
 # Pi
 pi() {
   local compose=~/localAi/docker-compose.yaml

@@ -10,14 +10,15 @@ ln -sf "$DOTFILES_DIR/config/bash/.bashrc" ~/.bashrc
 #Dunst
 ln -sf "$DOTFILES_DIR/config/dunst/dunstrc" ~/.config/dunst/dunstrc
 
-#Emacs
-ln -sf "$DOTFILES_DIR/config/emacs/init.el" ~/.config/emacs/init.el
+#Fontconfig (Iosevka as default font)
+mkdir -p ~/.config/fontconfig
+ln -sf "$DOTFILES_DIR/config/fontconfig/fonts.conf" ~/.config/fontconfig/fonts.conf
 
 #Hyprland
 mkdir -p ~/.config/hypr
 ln -sf "$DOTFILES_DIR/config/hyprland/hyprland.lua" ~/.config/hypr/hyprland.lua
-ln -sf "$DOTFILES_DIR/config/hyprland/hyprland.conf" ~/.config/hypr/hyprland.conf
 ln -sf "$DOTFILES_DIR/config/hyprland/hyprpaper.conf" ~/.config/hypr/hyprpaper.conf
+mkdir -p ~/BACKGROUND # wallpaper dir, add your images here
 
 #Kitty
 mkdir -p ~/.config/kitty
@@ -29,13 +30,11 @@ mkdir -p ~/$LOCALAIDIR
 ln -sf "$DOTFILES_DIR/config/localAI/.env" ~/$LOCALAIDIR/.env
 ln -sf "$DOTFILES_DIR/config/localAI/docker-compose.yaml" ~/$LOCALAIDIR/docker-compose.yaml
 ln -sf "$DOTFILES_DIR/config/localAI/llama-swap-config.yaml" ~/$LOCALAIDIR/llama-swap-config.yaml
-ln -sf "$DOTFILES_DIR/config/localAI/switch.sh" ~/$LOCALAIDIR/switch.sh
-#mkdir -p ~/$LOCALAIDIR/diffuse
-#ln -sf "$DOTFILES_DIR/config/localAI/diffuse/Dockerfile" ~/$LOCALAIDIR/diffuse/Dockerfile
 mkdir -p ~/$LOCALAIDIR/pi
-mkdir -p ~/$LOCALAIDIR/pi-home/agent
 ln -sf "$DOTFILES_DIR/config/localAI/pi/Dockerfile" ~/$LOCALAIDIR/pi/Dockerfile
-cp -f "$DOTFILES_DIR/config/localAI/pi/models.json" ~/$LOCALAIDIR/pi-home/agent/models.json
+#Pi agent state (models.json + extensions), merged over runtime dir so pi sessions are kept
+mkdir -p ~/$LOCALAIDIR/pi-home
+cp -rf "$DOTFILES_DIR/config/localAI/pi-home/agent" ~/$LOCALAIDIR/pi-home/agent
 
 #Waybar
 mkdir -p ~/.config/waybar
