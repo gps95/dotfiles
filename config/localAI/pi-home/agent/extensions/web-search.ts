@@ -6,6 +6,7 @@
  */
 import { Type } from "@earendil-works/pi-ai";
 import { defineTool, type ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import { TOGGLE_CHANNEL, exposureFor, isWebToolsEnabled, setWebToolsEnabled } from "./web-toggle";
 
 const USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
 
@@ -75,5 +76,18 @@ const webSearchTool = defineTool({
 });
 
 export default function (pi: ExtensionAPI) {
-  pi.registerTool(webSearchTool);
+  const register = () => pi.registerTool({ ...webSearchTool, exposure: exposureFor(isWebToolsEnabled()) });
+  register();
+  pi.events.on(TOGGLE_CHANNEL, register);
+
+  pi.registerCommand("web", {
+    description: "Toggle web tools (web_search + web_fetch). /web to toggle, /web on|off to set. Default: off.",
+    handler: (args, ctx) => {
+      const a = args.trim().toLowerCase();
+      const next = a === "on" || a === "enable" ? true : a === "off" || a === "disable" ? false : !isWebToolsEnabled();
+      setWebToolsEnabled(next);
+      pi.events.emit(TOGGLE_CHANNEL);
+      ctx.ui.notify(`Web tools ${next ? "enabled" : "disabled"}.`);
+    },
+  });
 }

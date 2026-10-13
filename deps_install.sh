@@ -12,6 +12,7 @@ hyprpaper
 #Main programs
 firefox
 yazi
+thunar
 freecad
 code
 steam
@@ -31,6 +32,12 @@ htop
 btop
 bluetui
 impala
+smbclient
+#mounts smb as a folder
+cifs-utils
+tailscale
+#for thunar to browse smb:// adresses
+gvfs-smb
 
 #Fonts
 ttf-nerd-fonts-symbols

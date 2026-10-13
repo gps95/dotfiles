@@ -13,6 +13,7 @@ import * as path from "node:path";
 import * as fs from "node:fs";
 import { Type } from "@earendil-works/pi-ai";
 import { defineTool, type ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import { TOGGLE_CHANNEL, exposureFor, isWebToolsEnabled } from "./web-toggle";
 
 const USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36";
 const DEFAULT_MAX_CHARS = 20000;
@@ -111,5 +112,7 @@ const webFetchTool = defineTool({
 });
 
 export default function (pi: ExtensionAPI) {
-  pi.registerTool(webFetchTool);
+  const register = () => pi.registerTool({ ...webFetchTool, exposure: exposureFor(isWebToolsEnabled()) });
+  register();
+  pi.events.on(TOGGLE_CHANNEL, register);
 }
