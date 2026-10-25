@@ -1,0 +1,31 @@
+# Yazi config — blue base with orange accents (matches kitty/waybar/wofi)
+# Docs: https://yazi.dev/docs/configuration
+
+# ---------- Openers ----------
+# Text files: show a menu to pick the editor. nvim is first (default, just
+# press Enter); VS Code and vi are the alternatives.
+# (If your yazi is older than the `ask` option, set ask = false — then the
+# first option, nvim, is always used.)
+
+[[open.rule]]
+url = "*"
+mime = "text/*"
+ask = true
+or = [
+    { run = "nvim {}", desc = "nvim" },
+    { run = "code -w {}", desc = "VS Code" },
+    { run = "vi {}", desc = "vi" },
+]
+
+# json files are not text/*, give them the same menu
+[[open.rule]]
+url = "*"
+mime = "application/json"
+ask = true
+or = [
+    { run = "nvim {}", desc = "nvim" },
+    { run = "code -w {}", desc = "VS Code" },
+]
+
+# ---------- Theme ----------
+# theme lives in theme.toml (auto-loaded from the config dir)

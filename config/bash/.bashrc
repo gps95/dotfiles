@@ -7,25 +7,17 @@
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 
-#Prompt config
-#PS1='[\u@\h \W]\$ ' #Default
+#Prompt: orange [user@host dir]$ , escape codes with 
+#\u user, \h host, \W working dir, 0;33m orange color
 PS1='\[\033[0;33m\][\u@\h \W ]\$\[\033[0m\] '
-#\[\033[0;33m to specify format:
-##0;33m for orange color
 
-#special chars:
-##\u -> user
-##\h -> host
-##\W -> current working directory
-
-#\[\033[0m to change the following format to white
-
-#You have to escape most stuff with \
+# Aliases
+alias ll='ls -la'
 
 # Pi
+# pi agent (docker sandbox in ~/localAi).
+# Configure tools on the fly inside pi: /tools, /web, /bash (see tools.ts extension)
 pi() {
-  local compose=~/localAi/docker-compose.yaml
-
   if [ "$1" = "update" ]; then
     docker exec pi pi update
   return
@@ -36,7 +28,24 @@ pi() {
   return
   fi
 
-  mkdir -p ~/pi-home
-  PI_WORKDIR=$PWD docker compose -f "$compose" --profile tools up -d pi || return 1
+  PI_WORKDIR=$PWD docker compose -f ~/localAi/docker-compose.yaml --profile tools up -d pi || return 1
   docker exec -it -u "$(id -u):$(id -g)" pi pi "$@"
 }
+
+
+# Pick a file with yazi, e.g. ypick cat, ypick code, ypick cd
+ypick() {
+  local tmp f
+  tmp=$(mktemp)
+  yazi --chooser-file "$tmp" >/dev/null && f=$(cat "$tmp")
+  rm -f "$tmp"
+  [[ -n $f ]] || return 1
+  if [[ $# -eq 0 ]]; then
+    echo "$f"
+    return
+  fi
+  "$@" "$f"
+}
+
+# To make ctrl+r and tab fuzzy
+eval "$(fzf --bash)"

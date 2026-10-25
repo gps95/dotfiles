@@ -14,7 +14,9 @@ config/
 ├── localAI/     llama-swap docker-compose + models config, pi container,
 │                pi-home/ (agent models.json + extensions)
 ├── waybar/      waybar config, style, temps script
-└── wofi/        wofi app launcher config/style
+├── wofi/        wofi app launcher config/style
+├── yazi/        yazi.toml (blue/orange theme, nvim/code open menu)
+└── sddm/        SDDM blue/orange theme + drop-in sddm.conf
 deps_install.sh  pacman deps + docker group
 install.sh       symlinks everything into place
 ```
@@ -44,5 +46,5 @@ The `localAI/` stuff is symlinked to `~/localAi/` — you'll need docker and a l
 
 - `config/localAI/.env` — set `VIDEO_GID`/`RENDER_GID` to your host group IDs (`getent group video/render`) and `HSA_OVERRIDE_GFX_VERSION` to your GPU (`rocminfo | grep gfx`).
 - `config/localAI/llama-swap-config.yaml` — model paths under `/models/...` map to `~/localAi/aimodels/...`.
-- `config/waybar/scripts/temps.sh` — hwmon paths are hardcoded to my PCI topology; find yours under `/sys/devices/pci0000:00/` and adjust.
+- `config/waybar/scripts/temps.sh` — auto-detects hwmon sensors by driver name (k10temp/coretemp, amdgpu, nvme, spd5118), works on any machine; missing sensors show N/A.
 - Monitor names/assignments (`HDMI-A-1`, `HDMI-A-2`, workspace split 7/3) match my setup.
