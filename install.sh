@@ -43,7 +43,6 @@ mkdir -p ~/$LOCALAIDIR/whisper-models
 #Yazi
 mkdir -p ~/.config/yazi
 ln -sf "$DOTFILES_DIR/config/yazi/yazi.toml" ~/.config/yazi/yazi.toml
-ln -sf "$DOTFILES_DIR/config/yazi/theme.toml" ~/.config/yazi/theme.toml
 
 #Waybar
 mkdir -p ~/.config/waybar
