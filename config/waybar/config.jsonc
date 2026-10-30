@@ -198,11 +198,11 @@
       "format": "",
       "format-wifi": "",
       "format-ethernet": "󰊗",
-      "format-disconnected": "",
+      "format-disconnected": "󰂭",
       "tooltip-format": "{ifname} via {gwaddr}  󰊗",
       "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
       "tooltip-format-ethernet": "{ifname} 󰊗",
-      "tooltip-format-disconnected": "",
+      "tooltip-format-disconnected": "No network connection",
       "max-length": 50,
       "on-click": "exec kitty impala"
     },
