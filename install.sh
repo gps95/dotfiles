@@ -8,7 +8,9 @@ echo "Creating symlinks..."
 ln -sf "$DOTFILES_DIR/config/bash/.bashrc" ~/.bashrc
 
 #Dunst
+mkdir -p ~/.config/dunst
 ln -sf "$DOTFILES_DIR/config/dunst/dunstrc" ~/.config/dunst/dunstrc
+ln -sfn "$DOTFILES_DIR/config/dunst/scripts" ~/.config/dunst/scripts
 
 #Fontconfig (Iosevka as default font)
 mkdir -p ~/.config/fontconfig

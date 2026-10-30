@@ -5,3 +5,11 @@
   #none: don't follow anything
   #all of these override the monitor option 
   follow = mouse
+
+[pi]
+  appname = pi
+  script = ~/.config/dunst/scripts/pi-sound.sh
+
+[pi-question]
+  appname = pi
+  category = pi-question

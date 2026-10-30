@@ -33,6 +33,7 @@ services:
       - ./pi-home:/home/pi/.pi
       - pi-npm:/home/pi/.npm-global
       - /run/user/1000/pulse:/run/pw/pulse # host PipeWire/Pulse socket (mic); verify `native` exists
+      - /run/user/1000/bus:/run/user/1000/bus # host session D-Bus -> host desktop notifications (notify.ts); recreate container after login changes
     mem_limit: 3g
     networks: [ai]
 
