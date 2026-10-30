@@ -38,6 +38,9 @@ cifs-utils
 tailscale
 #for thunar to browse smb:// adresses
 gvfs-smb
+#fuzzy search
+fzf
+
 
 #Fonts
 ttf-nerd-fonts-symbols

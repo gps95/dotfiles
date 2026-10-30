@@ -1,0 +1,9 @@
+{
+  "provider": {
+    "type": "openai-compatible",
+    "endpoint": "http://127.0.0.1:8788/v1/audio/transcriptions",
+    "model": "large-v3-turbo"
+  },
+  "capture": { "type": "ffmpeg", "inputFormat": "pulse", "input": "default" },
+  "cleanup": { "enabled": false }
+}

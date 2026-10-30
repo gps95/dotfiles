@@ -35,6 +35,8 @@ ln -sf "$DOTFILES_DIR/config/localAI/pi/Dockerfile" ~/$LOCALAIDIR/pi/Dockerfile
 #Pi agent state (models.json + extensions), merged over runtime dir so pi sessions are kept
 mkdir -p ~/$LOCALAIDIR/pi-home
 cp -rf "$DOTFILES_DIR/config/localAI/pi-home/agent" ~/$LOCALAIDIR/pi-home/agent
+#Pi STT: whisper.cpp server binary + ggml-large-v3-turbo.bin (one-time download, see README)
+mkdir -p ~/$LOCALAIDIR/whisper-models
 
 #Yazi
 mkdir -p ~/.config/yazi

@@ -32,7 +32,36 @@ services:
       - ${PI_WORKDIR:-.}:/workspace
       - ./pi-home:/home/pi/.pi
       - pi-npm:/home/pi/.npm-global
+      - /run/user/1000/pulse:/run/pw/pulse # host PipeWire/Pulse socket (mic); verify `native` exists
+    mem_limit: 3g
     networks: [ai]
+
+  # ---- STT: whisper.cpp server on cpu ----
+  whisper:
+    profiles: [tools]
+    container_name: whisper
+    image: ghcr.io/ggml-org/whisper.cpp:main
+    network_mode: "service:pi"
+    entrypoint: ["whisper-server"]
+    restart: unless-stopped
+    depends_on: [pi]
+    volumes:
+      - ./whisper-models:/models:ro
+    mem_limit: 4g
+    command:
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8788"
+      - -t
+      - "4"
+      - -m
+      - /models/ggml-large-v3-turbo.bin
+      - --inference-path
+      - /v1/audio/transcriptions
+      - --convert
+      - -l
+      - auto
 
 volumes:
   pi-npm:
