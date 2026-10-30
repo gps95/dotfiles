@@ -5,7 +5,7 @@ services:
     container_name: llama-swap
     restart: unless-stopped
     ports:
-      - "8081:8080"
+      - "127.0.0.1:8081:8080"
     volumes:
       - ./aimodels:/models
       - ./llama-swap-config.yaml:/etc/llama-swap/config/config.yaml #hot reloads on config change
